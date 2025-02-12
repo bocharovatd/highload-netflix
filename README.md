@@ -37,15 +37,15 @@ Netflix - стриминговый сервис для просмотра фил
 ![Geography](images/geography.png)
 
 #### Подписчики
-- всего подписчикой за последнюю четверть 2024 года - 300M [^4]
-- новых полписчиков за последнюю четверть 2024 года - 18M [^5]
+- всего подписчикой за последнюю четверть 2024 года - 300M [^3]
+- новых полписчиков за последнюю четверть 2024 года - 18M [^4]
 
 ## Список источников:
 [^1]: [Traffic Analysis](https://hypestat.com/info/netflix.com)
 
 [^2]: [Traffic Demographics](https://www.similarweb.com/ru/website/netflix.com/#demographics)
 
-[^2]: [Subscribers Fourth Quarter of 2024](https://www.statista.com/statistics/250934/quarterly-number-of-netflix-streaming-subscribers-worldwide/)
+[^3]: [Subscribers Fourth Quarter of 2024](https://www.statista.com/statistics/250934/quarterly-number-of-netflix-streaming-subscribers-worldwide/)
 
-[^2]: [New Subscribers Fourth Quarter of 2024](https://www.statista.com/statistics/196645/quarterly-net-subscriber-additions-of-netflix-since-2009/)
+[^4]: [New Subscribers Fourth Quarter of 2024](https://www.statista.com/statistics/196645/quarterly-net-subscriber-additions-of-netflix-since-2009/)
 
