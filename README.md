@@ -374,7 +374,7 @@ Zuul выступает единой точкой входа, обрабатыв
 | **`content`** | Основная продуктовая сущность: тип контента (movie, serial), название, дата выхода (release_date), страна производства, описание. Связана с жанрами, актерами и избранным. |
 | **`media`** | Техническая сущность: тип медиа (movie, episode, trailer). Служит для связи с DASH-сегментами через треки (track) и компоненты (component). |
 | **`track`** | Дорожка медиа: видео или аудио. орожка, на которую ссылаются все аудио/видео для media. Связывает медиа (media) с компонентами (component). |
-| **`component`** | Определяет тип сегмента: video (разрешение) или audio (язык, каналы). Связывается с треком (track) и сегментами (event). |
+| `component` | Определяет тип сегмента: video (разрешение) или audio (язык, каналы). Связывается с треком (track) и сегментами (event). |
 | `video_component` | Хранит параметры видео-компонента: разрешение (Low, Medium, SD, HD, Ultra HD). Связана с component. |
 | `audio_component` | Хранит параметры аудио-компонента: язык и каналы (left, right). Связана с component. |
 | **`event`** | Сегмент медиа во временном промежутке: начало (start_time), конец (end_time), ссылка на файл в S3 (s3_url). Используется DASH. |
@@ -390,6 +390,14 @@ Zuul выступает единой точкой входа, обрабатыв
 | `watch_history` | История просмотров: связывает пользователя (user) с медиа (media). Содержит прогресс просмотра (progress) и время просмотра (watched_at). |
 | `recommendation` | Рекомендации для пользователей: векторные данные (vector_data в формате JSONB) для персонализации. Включает метки времени создания и обновления. |
 | `notification` | Уведомления: текст сообщения (message), статус доставки (pending, sent, failed), время отправки (sent_at). Используется для оповещений. |
+
+Хранение DASH сегментов реализовано за счет четырех таблиц: media, track, component, event, которые представляют упрощенную схему хранения Media Documents [^27]
+
+![Media Timeline Comprising Multiple Tracks](images/Media_Timeline_Comprising_Multiple_Tracks.webp)
+<br>_Временная шкала мультимедиа, состоящая из нескольких дорожек (tracks)_
+
+![Data Structure of the Media Document](images/Data_Structure_of_the_Media_Document.webp)
+<br>_Иерархическая структура Media Document_
 
 ### Размеры данных
 
@@ -408,13 +416,13 @@ Zuul выступает единой точкой входа, обрабатыв
 - фильмов - 13_650
 - сериалов - 5_850
 - эпизодов - 93_600
-- жанров - 28 [^27]
+- жанров - 28 [^28]
 - историй просмотров - 3310
 - позиций в избранном - 50
 - media - 126_750 (13_650 фильмов + 93_600 эпизодов + 19_500 трейлеров)
 - track - 253_500 (2 * 126_750)
 - video_component - 633_750 (5 * 126_750)
-- audio_component - 5_070_000 (20 [^28] * 2 * 126_750)
+- audio_component - 5_070_000 (20 [^29] * 2 * 126_750)
 - events - 61_863_750 (5 * ((13_650 * 90 + 93_600 * 45 + (13_650 + 5_850) * 3) / 4) + 20 * 2 * ((13_650 * 90 + 93_600 * 45 + (13_650 + 5_850) * 3) / 4))
 
 
@@ -478,7 +486,7 @@ Zuul выступает единой точкой входа, обрабатыв
 - При удалении пользователя необходимо каскадно удалять связанные данные
 - В favorite пара user_id + content_id должна быть уникальной (чтобы пользователь не добавлял контент в избранное дважды)
 - В watch_history progress (прогресс просмотра) не может превышать длительность медиа из media.duration
-- Created_at заполяняется автоматически
+- Created_at, updated_at заполяняются автоматически
 - Статус delivery_status по умолчанию устанавливается в pending
 
 ## Список источников:
@@ -534,6 +542,8 @@ Zuul выступает единой точкой входа, обрабатыв
 
 [^26]: [Curbing Connection Churn in Zuul](https://netflixtechblog.com/curbing-connection-churn-in-zuul-2feb273a3598)
 
-[^27]: [Genres Statistics](https://www.kaggle.com/datasets/evanschreiner/genres)
+[^27]: [Media Timeline](https://netflixtechblog.com/netflix-mediadatabase-media-timeline-data-model-4e657e6ffe93)
 
-[^28]: [Language Support](https://netflixtechblog.com/global-languages-support-at-netflix-testing-search-queries-ede40f7d93d3)
+[^28]: [Genres Statistics](https://www.kaggle.com/datasets/evanschreiner/genres)
+
+[^29]: [Language Support](https://netflixtechblog.com/global-languages-support-at-netflix-testing-search-queries-ede40f7d93d3)
