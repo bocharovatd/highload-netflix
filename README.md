@@ -497,7 +497,7 @@ Zuul выступает единой точкой входа, обрабатыв
 - Created_at, updated_at заполяняются автоматически
 - Статус delivery_status по умолчанию устанавливается в pending
 
-## 5. Физическая схема БД
+## 6. Физическая схема БД
 
 ![Netflix denormalized ERD](images/ERD_denormalized.svg)
 
