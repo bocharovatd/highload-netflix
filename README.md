@@ -666,7 +666,7 @@ Python: [elasticsearch-py](https://github.com/elastic/elasticsearch-py)
 - **ElasticSearch**: snapshots
 - **S3**: встроенное версионирование, в S3 сохраняются снапшоты
 
-## 6. Алгоритмы
+## 7. Алгоритмы
 ### Описание проблемы (collation noise)
 В современных процессорах каждое гипертреды и ядра разделяют уровни кешей друг с другом [^32].
 ![Multi-processor_multi-core_multi-thread](images/Multi-processor_multi-core_multi-thread.png) 
