@@ -10,6 +10,7 @@
 7. [Алгоритмы](#7-алгоритмы)
 8. [Технологии](#8-технологии)
 9. [Обеспечение надежности](#9-обеспечение-надежности)
+10. [Схема проекта](#10-схема-проекта)
 
 ## 1. Тема и целевая аудитория
 Netflix - стриминговый сервис для просмотра фильмов и сериалов.
@@ -875,6 +876,10 @@ Python: [elasticsearch-py](https://github.com/elastic/elasticsearch-py)
 | **Микросервисы**<br> (ex: NMDB) | - Кластеризация, health checks, autoscaling через Kubernetes (Titus)<br> - EVCache для кэширования<br> - Circuit Breaker через Hystrix | **Кластеризация**: сервисы развертываются в 3+ экземплярах. **Health Checks**: Eureka проверяет доступность каждые 30 сек. **Autoscaling**: кластер расширяется при пиковой нагрузке. **EVCache**: кэширует UUID медиафайлов и URL. **Hystrix**: блокирует запросы к упавшим сервисам на 30 сек. |
 | **Apache Kafka** | - Репликация партиций (min.insync.replicas=2)<br>- MirrorMaker 2.0 для межрегиональной синхронизации | **Репликация партиций**: каждое сообщение копируется на 3 брокера. **MirrorMaker 2.0**: данные синхронизируются между регионами с задержкой <1 сек. |
 | **Hadoop** | - Резервные кластеры в Amazon EMR<br> - Autoscaling на базе Amazon EMR | **Резервные кластеры**: готовые конфигурации для быстрого запуска при сбое. **Autoscaling**: добавляются узлы при пиковой нагрузке. |  
+
+## 10. Схема проекта
+![Netflix Scheme](images/Netflix_Scheme.png)
+[Netflix Scheme](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Netflix.drawio&dark=auto#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1qtIfbSKr_HZy_d7FpNYWi2nkNTiC0P9j%26export%3Ddownload) 
 
 ## Список источников:
 [^1]: [Traffic Analysis](https://hypestat.com/info/netflix.com)
