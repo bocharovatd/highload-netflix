@@ -879,7 +879,60 @@ Python: [elasticsearch-py](https://github.com/elastic/elasticsearch-py)
 
 ## 10. Схема проекта
 ![Netflix Scheme](images/Netflix_Scheme.png)
-[Netflix Scheme](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Netflix.drawio&dark=auto#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1qtIfbSKr_HZy_d7FpNYWi2nkNTiC0P9j%26export%3Ddownload) 
+[Netflix Scheme](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Netflix.drawio&dark=auto#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1WN5hYdga_6-o-s6kwV6A3FcJNotxQ1Gx%26export%3Ddownload) 
+
+### Пояснения к схеме
+
+#### Open Connect
+- система CDN cерверов для кэширования и отдачи контента на строне интернет-провайдера
+- обеспечивает глобальную балансировку нагрузки
+
+#### [Zuul](#l7-балансировка)
+- API Gateway, осуществляющий L7 балансировку
+- является главной точкой входа в инфраструктуру
+- использует **Eureka** в качестве service discovery
+- осуществляет маршрутизацию как внутренних, так и внешних запросов
+
+#### User Service
+- отвечает за чтение и запись основных данных о пользователях
+
+#### Media Service
+- service layer, сотоящий из 4-х микросервисов: [NMDB](#nmdb), MDVS, MDPS, MDAS
+- используется для хранения DASH-сегментов медиа-файлов и связанных с ними url для S3 хранилища
+
+#### Streaming Service
+- отвечает за потоковую передачу видео
+- получает DASH-сегменты и url для медиа-файлов в S3 хранилище из **Media Service**
+
+#### Recomendation Service
+- аналитический service layer, включающий **Analitics Service** и **User Eperience Service**
+- **Analitics Service** 
+    - собирает данные о просмотрах пользователей
+    - осуществляет чтение и запись в Apache Spark по паттерну CQRS
+    - агрегирует сведения о пользовательских предпочтениях и передает их в **User Experience Service**
+- **User Experience Service** 
+    - отдает фронтенду подготовленные данные о пользовательских предпочтениях
+
+**Search Service**
+- используется для обработки поисковых запросов
+- получает данные из Elastic Search, которые синхронизируются с помощью сервиса Delta
+    - Delta Connector читает данные из **Content Service** PostgreSQL при их обновлении и передает их через Kafka в основной сервис Delta
+    - Delta обогащает данные сведениями, собранными из **Analitics Service**, для ранжирования результатов поиска на основе предпочтений конкретного пользователя и общих трендов
+    - обогащенные данные записываются в Elastic Search
+
+**Content Service**
+- отвечает за раздачу основной информации о фильмах, сериалах и эпизодах, необходимой для отображения на страницах
+- осуществляет чтение и запись в PostgreSQL по паттерну CQRS
+
+#### Chaos Monkey
+- тестирует отказоустойчивость, случайно останавливая EC2-инстансы, удаляя диски или нарушая сетевые соединени
+
+#### [EVCache](#evcache)
+- распределенная БД для кэширования наиболее частых запросов
+- используется сервисами: **User Service**, **Media Service**, **Content Service**, **Search Service**
+
+#### Сервисы мониторинга
+- сбор метрик со всех сервисов осуществляется с помошью Prometheus, визуализация - Graphana
 
 ## Список источников:
 [^1]: [Traffic Analysis](https://hypestat.com/info/netflix.com)
