@@ -973,8 +973,6 @@ Python: [elasticsearch-py](https://github.com/elastic/elasticsearch-py)
     - RPS - 17_850 / 19 = 940 RPS
     - Net - 1402.8 / 19 = 73.84 Гбит/сек 
 
-Удельное потребление ресурсов
-
 | Технология | Характер сервиса | RPS (на ядро) | RAM (на экземпляр) |
 | --- | --- | --- | --- |
 | Go (Gin) | Маршрутизация| 5000 | 50 МБ |
@@ -1013,8 +1011,6 @@ Python: [elasticsearch-py](https://github.com/elastic/elasticsearch-py)
     - 940 RPS
     - ROM (content, episode из [расчета размеров данных](#размеры-данных)): 12.2 Мб + 49.3 Мб + (1.8 КБ * 3 + 33.2 Мб * 10) * 19_500 (jsonb поля) = 6_322 Гб
 
-Удельное потребление ресурсов
-
 | Технология | Характер нагрузки | RPS (на ядро) | RAM на экземпляр |
 | --- | --- | --- | --- |
 | Tarantool | In-Memory, высоконагруженные транзакции | 5_000 | 512 ГБ |
@@ -1046,11 +1042,11 @@ Python: [elasticsearch-py](https://github.com/elastic/elasticsearch-py)
 | Zuul | AWS EKS | Stateless, автомасштабирование. |
 | User Service | AWS EKS | Микросервис с умеренной нагрузкой, управляется Kubernetes. |
 | Media Service | AWS EKS | Обработка метаданных, требует горизонтального масштабирования. |
-| Streaming Service | AWS EC2 (c6gn) | Выделенные инстансы для 100 Гбит/с сети и низкой задержки. |
+| Streaming Service | AWS EC2  | Выделенные инстансы для 100 Гбит/с сети и низкой задержки. |
 | Recommendation | AWS Lambda | Serverless для эпизодических ML-задач. |
 | Search Service | AWS OpenSearch | Управляемый Elasticsearch с автоматическим шардированием. |
 | Content Service | AWS EKS | Стандартный JSON API, интегрирован с RDS. |
-| Базы данных | AWS RDS/Keyspaces | Управляемые сервисы с бэкапами и репликацией. |
+| Базы данных | AWS RDS | Управляемые сервисы с бэкапами и репликацией. |
 | Хранилище (S3) | AWS S3 | Глобальное хранилище видео с репликацией между регионами. |
 
 ### Конфигурация серверов
