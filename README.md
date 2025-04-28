@@ -1052,7 +1052,7 @@ Python: [elasticsearch-py](https://github.com/elastic/elasticsearch-py)
 ### Конфигурация серверов
 
 | Название | Хостинг | Конфигурация | Cores | Cnt | Аренда/мес |
-| --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | zuul-node | AWS | 2x6338/16x32GB/2xNVMe4T/2x25Gb/s | 64 | 2 | $0.34/hr |
 | media-node | AWS | 2x4310/8x64GB/2xNVMe2T/2x10Gb/s | 32 | 31 | $0.46/hr |
 | stream-node | AWS | 2x7B12/16x128GB/4xNVMe8T/4x100Gb/s | 128 | 2 | $1,024 |
