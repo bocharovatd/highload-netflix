@@ -1078,7 +1078,7 @@ RAM = CPU * RAM для обслуживания RPS на ядро
 | media-db-node | AWS | 2xEPYC 7B12/32x128GB/4xNVMe8T/4x400Gb/s | 128 | 8 | $1,200 | CPU: 128 × 4 = 512 ≥ 242.<br> RAM: 128 ГБ × 4 = 512 ГБ ≥ 30.9 ГБ.<br> ROM: 2 ТБ × 4 = 8 ТБ ≥ 408 ГБ. |
 | stream-db-node | AWS | AWS S3 (139 ПБ) | - | 1 | $15,000 | ROM: 139 ПБ = 139 ПБ. Резервирование: 3 копии в S3. |
 | cassandra-node | AWS | 2x6248/16x128GB/8xSSD32T/2x25Gb/s | 80 | 38 | $3,800 | CPU: 80 × 19 = 1,520 ≥ 21.<br> RAM: 128 ГБ × 19 = 2,432 ГБ ≥ 1.3 ГБ.<br> ROM: 32 ТБ × 19 = 608 ТБ ≥ 242 ТБ. |
-| postgres-node | AWS RDS | Managed (16 vCPU, 128 ГБ RAM) | 16 | 8 | $9,600 | CPU: 16 × 4 = 64 ≥ 4.<br> RAM: 128 ГБ × 4 = 512 ГБ ≥ 256 МБ.<br> ROM: 2 ТБ × 4 = 8 ТБ ≥ 6.3 ТБ. |
+| postgres-node | AWS | 2x6248/16x128GB/8xSSD32T/2x25Gb/s | 80 | 4 | $3,200 | CPU: 80 × 4 = 320 ≥ 4.<br> RAM: 128 ГБ × 16 = 2 ТБ ≥ 256 МБ.<br> ROM: 32 ТБ × 8 = 256 ТБ (RAID10) → 128 ТБ ≥ 6.3 ТБ. |
 
 ## Список источников:
 [^1]: [Traffic Analysis](https://hypestat.com/info/netflix.com)
